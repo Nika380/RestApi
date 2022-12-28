@@ -28,7 +28,7 @@ public class LoanController {
         return loanService.addLoan(registrationDtos);
     }
 
-    @Scheduled(fixedRate = 1000)
+    @Scheduled(fixedRate = 10_000_00)
     @PutMapping("")
     void update() {
         loanService.update();
