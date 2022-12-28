@@ -1,14 +1,11 @@
 package project.rest.restapi.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Objects;
 
 @Data
 @Entity
@@ -46,8 +43,6 @@ public class Customer {
         updatedAt = LocalDateTime.now();
     }
 
-    @JsonBackReference
-    @OneToMany(mappedBy = "customer")
-    private List<Loan> loan;
+
 
 }

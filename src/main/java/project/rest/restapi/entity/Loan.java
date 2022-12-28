@@ -1,11 +1,11 @@
 package project.rest.restapi.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
@@ -22,7 +22,7 @@ public class Loan {
     private String loanNumber;
     @Basic
     @Column(name = "amount")
-    private Integer amount;
+    private double amount;
     @Basic
     @Column(name = "interest_rate")
     private Double interestRate;
@@ -31,7 +31,7 @@ public class Loan {
     private Integer term;
     @Basic
     @Column(name = "interest")
-    private Integer interest;
+    private double interest;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @Basic
@@ -43,15 +43,20 @@ public class Loan {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+
     @PrePersist
     void prePersist () {
         createdAt = LocalDateTime.now();
         updatedAt = LocalDateTime.now();
     }
-    @JsonManagedReference
+
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Customer customer;
+
+    @OneToMany
+    @JoinColumn(name = "loan_number", referencedColumnName = "loan_number", insertable = false, updatable = false)
+    private List<Collateral> collateral;
 
 
 

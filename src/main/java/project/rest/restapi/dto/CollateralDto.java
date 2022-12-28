@@ -13,6 +13,8 @@ public class CollateralDto {
 
     private String value;
 
+    private String loanNumber;
+
 
 
 

@@ -2,14 +2,13 @@ package project.rest.restapi.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.type.descriptor.jdbc.SmallIntJdbcType;
 import project.rest.restapi.services.collateral.CollateralType;
 
 import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "collateral")
+@Table(name = "collaterals")
 public class Collateral {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -19,6 +18,9 @@ public class Collateral {
     @Column(name = "type")
     @Enumerated
     private CollateralType type;
+
+    @Column(name = "loan_number")
+    private String loanNumber;
 
     @Column(name = "value")
     private String value;
@@ -31,7 +33,6 @@ public class Collateral {
         createdAt = LocalDateTime.now();
         updatedAt = LocalDateTime.now();
     }
-
 
 
 
