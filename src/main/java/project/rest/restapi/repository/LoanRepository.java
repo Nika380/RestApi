@@ -14,7 +14,7 @@ public interface LoanRepository extends JpaRepository<Loan, Integer>, JpaSpecifi
 
     @Modifying
     @Transactional
-    @Query("UPDATE Loan SET interest = interest + (amount * (interestRate / 365) / (24 * 60) * 3)")
+    @Query("UPDATE Loan SET interest = interest + (amount * (interestRate / 365) / (24 * 60) * 3), updatedAt = local_datetime ")
     void updateInterest();
 
     Loan findByLoanNumber(String loanNumber);

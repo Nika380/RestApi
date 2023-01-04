@@ -5,7 +5,6 @@ import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import project.rest.restapi.SearchParameters.SearchParams;
 import project.rest.restapi.entity.Collateral;
@@ -16,8 +15,6 @@ import project.rest.restapi.exceptions.NotFoundException;
 import project.rest.restapi.repository.CollateralRepository;
 import project.rest.restapi.repository.CustomerRepository;
 import project.rest.restapi.repository.LoanRepository;
-
-import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -33,7 +30,7 @@ public class LoanService implements  LoanInterface{
     }
 
     @Override
-    public List<Loan> getLoans(SearchParams params) {
+    public Page<Loan> getLoans(SearchParams params) {
 
 
 
@@ -64,18 +61,15 @@ public class LoanService implements  LoanInterface{
                 predicate = cb.and(predicate, cb.equal(customer.get("privateNumber"), params.getPrivateNumber()));
             }
             if(params.getDateFrom()!=null) {
-                Join<Loan, Customer> customer = root.join("customer", JoinType.LEFT);
-                predicate = cb.and(predicate, cb.equal(customer.get("dateFrom"), params.getDateFrom()));
+                predicate = cb.and(predicate, cb.greaterThanOrEqualTo(root.get("dateFrom"), params.getDateFrom()));
             }
             if(params.getDateTo()!=null) {
-
-                Join<Loan, Customer> customer = root.join("customer", JoinType.LEFT);
-                predicate = cb.and(predicate, cb.greaterThanOrEqualTo(customer.get("dateTo"), params.getDateTo()));
+                predicate = cb.and(predicate, cb.lessThanOrEqualTo(root.get("dateTo"), params.getDateTo()));
             }
 
 
             return  predicate;
-        });
+        },PageRequest.of(params.getPage(), params.getPageSize()));
 
 
     }

@@ -10,7 +10,7 @@ import project.rest.restapi.entity.RegistrationDtos;
 import java.util.List;
 
 public interface LoanInterface {
-    List<Loan> getLoans(SearchParams params);
+    Page<Loan> getLoans(SearchParams params);
 
     RegistrationDtos addLoan(RegistrationDtos registrationDtos);
 }

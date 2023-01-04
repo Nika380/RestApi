@@ -1,7 +1,5 @@
 package project.rest.restapi.dto;
 import lombok.Data;
-import project.rest.restapi.entity.Loan;
-import project.rest.restapi.repository.CollateralRepository;
 
 
 @Data

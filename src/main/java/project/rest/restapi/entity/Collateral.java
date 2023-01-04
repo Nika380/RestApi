@@ -3,7 +3,6 @@ package project.rest.restapi.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import project.rest.restapi.services.collateral.CollateralType;
-
 import java.time.LocalDateTime;
 
 @Data
