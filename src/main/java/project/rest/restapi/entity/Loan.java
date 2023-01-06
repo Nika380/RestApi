@@ -3,6 +3,9 @@ package project.rest.restapi.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import java.math.BigInteger;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -24,7 +27,7 @@ public class Loan {
     private double amount;
     @Basic
     @Column(name = "interest_rate")
-    private Double interestRate;
+    private double interestRate;
     @Basic
     @Column(name = "term")
     private Integer term;
@@ -35,7 +38,7 @@ public class Loan {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @Basic
     @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @Basic
@@ -45,7 +48,7 @@ public class Loan {
 
     @PrePersist
     void prePersist () {
-        createdAt = LocalDateTime.now();
+        createdAt = LocalDate.now();
         updatedAt = LocalDateTime.now();
     }
 

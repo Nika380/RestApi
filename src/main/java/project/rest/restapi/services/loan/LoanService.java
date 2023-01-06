@@ -16,6 +16,7 @@ import project.rest.restapi.repository.CollateralRepository;
 import project.rest.restapi.repository.CustomerRepository;
 import project.rest.restapi.repository.LoanRepository;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class LoanService implements  LoanInterface{
@@ -61,10 +62,10 @@ public class LoanService implements  LoanInterface{
                 predicate = cb.and(predicate, cb.equal(customer.get("privateNumber"), params.getPrivateNumber()));
             }
             if(params.getDateFrom()!=null) {
-                predicate = cb.and(predicate, cb.greaterThanOrEqualTo(root.get("dateFrom"), params.getDateFrom()));
+                predicate = cb.and(predicate, cb.greaterThanOrEqualTo(root.get("createdAt"), params.getDateFrom()));
             }
             if(params.getDateTo()!=null) {
-                predicate = cb.and(predicate, cb.lessThanOrEqualTo(root.get("dateTo"), params.getDateTo()));
+                predicate = cb.and(predicate, cb.lessThanOrEqualTo(root.get("createdAt"), params.getDateTo()));
             }
 
 
@@ -118,6 +119,9 @@ public class LoanService implements  LoanInterface{
         return registrationDtos;
     }
 
+    public Optional<Loan> loanById(int id) {
+        return loanRepository.findById(id);
+    }
     public void update() {
         loanRepository.updateInterest();
     }

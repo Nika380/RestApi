@@ -1,6 +1,8 @@
 package project.rest.restapi.dto;
 import lombok.Data;
 
+import java.math.BigInteger;
+
 
 @Data
 
@@ -10,10 +12,10 @@ public class LoansDto {
 
     private Integer userId;
     private String loanNumber;
-    private Integer amount;
-    private Double interestRate;
+    private double amount;
+    private double interestRate;
     private Integer term;
-    private Integer interest;
+    private double interest;
 
 
 

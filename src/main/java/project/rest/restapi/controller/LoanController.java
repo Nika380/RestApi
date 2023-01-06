@@ -8,6 +8,8 @@ import project.rest.restapi.entity.Loan;
 import project.rest.restapi.entity.RegistrationDtos;
 import project.rest.restapi.services.loan.LoanService;
 
+import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/loans")
@@ -26,6 +28,11 @@ public class LoanController {
     @PostMapping("/register")
     RegistrationDtos addLoan(@RequestBody RegistrationDtos registrationDtos) {
         return loanService.addLoan(registrationDtos);
+    }
+
+    @GetMapping("/{id}")
+    Optional<Loan> getById(@PathVariable int id) {
+        return loanService.loanById(id);
     }
 
     @Scheduled(fixedRate = 10_000)
