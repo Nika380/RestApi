@@ -1,11 +1,12 @@
 package project.rest.restapi.SearchParameters;
 
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 import project.rest.restapi.services.collateral.CollateralType;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Data
 public class SearchParams {
@@ -18,6 +19,7 @@ public class SearchParams {
     private LocalDate dateTo;
 
     private String privateNumber;
+    @Enumerated(EnumType.STRING)
     private CollateralType type;
     private String value;
 

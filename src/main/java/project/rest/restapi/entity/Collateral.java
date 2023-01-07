@@ -15,7 +15,7 @@ public class Collateral {
     private Integer id;
 
     @Column(name = "type")
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private CollateralType type;
 
     @Column(name = "loan_number")
